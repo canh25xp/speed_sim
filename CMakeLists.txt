@@ -1,8 +1,5 @@
-cmake_minimum_required(VERSION 3.22)
-project(opencv_test VERSION 1.0)
+cmake_minimum_required(VERSION 3.10)
 
-find_package(OpenCV REQUIRED)
+project(speed_sim VERSION 1.0)
 
-add_executable(opencv_test main.cpp)
-
-target_link_libraries(opencv_test ${OpenCV_LIBS})
+add_executable(speed_sim main.cpp)
