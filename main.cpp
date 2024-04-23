@@ -10,19 +10,19 @@ int num_sensors = 0;
 int sampling = 0;
 int interval = 0;
 
-int main(int argc, char **argv) {
-  CLI::App parser{"Speed sensor simulation and data analaysis"};
-  argv = parser.ensure_utf8(argv);
+int main(int argc, char** argv) {
+    CLI::App app{"Speed sensor simulation and data analaysis "};
+    argv = app.ensure_utf8(argv);
 
-  parser.GET("-n", num_sensors, "model file path");
-  parser.GET("-st", sampling, "file or folder or 0(webcam)");
-  parser.GET("-si", interval, "data file path");
+    app.add_option("-n", num_sensors, "number of sensors");
+    app.add_option("-s", sampling, "sampling time");
+    app.add_option("-i", interval, "simulation interval");
 
-  CLI11_PARSE(parser, argc, argv);
+    CLI11_PARSE(app, argc, argv);
+    
+    cout << num_sensors << endl;
+    cout << sampling << endl;
+    cout << interval << endl;
 
-  cout << num_sensors << endl;
-  cout << sampling << endl;
-  cout << interval << endl;
-
-  return 0;
+    return 0;
 }
