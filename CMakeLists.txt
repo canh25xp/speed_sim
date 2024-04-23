@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(speed_sim VERSION 1.0)
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+
+project(speed_sim)
+
+find_package(fmt CONFIG REQUIRED)
 
 add_executable(speed_sim main.cpp)
+
+target_link_libraries(speed_sim PRIVATE fmt::fmt)
