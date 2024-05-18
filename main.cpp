@@ -21,9 +21,9 @@ string generateTimestamp();
 
 int main(int argc, char** argv) {
     Parser parser(argc, argv);
-    num_sensors = parser.get("-n", 0);
-    sampling = parser.get("-st", 0);
-    interval = parser.get("-si", 0);
+    num_sensors = parser.get("-n", 1); // 1 sensor
+    sampling = parser.get("-st", 10);  // 10 seconds
+    interval = parser.get("-si", 1);   // 1 hour
     cout << num_sensors << endl;
     cout << sampling << endl;
     cout << interval << endl;
