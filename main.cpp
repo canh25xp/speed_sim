@@ -55,7 +55,7 @@ main (int argc, char **argv)
           string timestamp = generateTimestamp ();
 
           // Write data to file
-          outputFile << j << ", " << timestamp << ", " << fixed
+          outputFile << j << "," << timestamp << "," << fixed
                      << setprecision (1) << speed << endl;
         }
 
