@@ -8,6 +8,8 @@
 
 #include "parser.hpp"
 
+#define SAVE_NAME "speed_data.csv"
+
 using namespace std;
 
 int num_sensors = 0;
@@ -31,7 +33,7 @@ main (int argc, char **argv)
   cout << interval << endl;
 
   // Open file for writing
-  ofstream outputFile ("speed_data.csv");
+  ofstream outputFile (SAVE_NAME);
   if (!outputFile)
     {
       cerr << "Error opening file." << endl;
@@ -63,7 +65,7 @@ main (int argc, char **argv)
   // Close file
   outputFile.close ();
 
-  cout << "Simulation completed. Data saved to speed_data.csv" << endl;
+  cout << "Simulation completed. Data saved to " << SAVE_NAME << endl;
   return 0;
 }
 
