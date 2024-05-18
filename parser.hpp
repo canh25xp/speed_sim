@@ -15,55 +15,31 @@ struct Argument
 class Parser
 {
 public:
-  /// <summary>
-  /// Parser constructor
-  /// </summary>
-  /// <param name="argc">number of command line arguments (from main())</param>
-  /// <param name="argv">array of command line arguments (from main())</param>
+  // Parser constructor
+  //
+  // @param argc: number of command line arguments
+  // @param argv: array of command line arguments
   Parser (int &argc, char **argv);
 
-  /// <summary>
-  /// to check if argument exist
-  /// </summary>
-  /// <param name="name">argument name</param>
-  /// <returns>true if argument exist</returns>
+  // to check if argument exist
+  //
+  // @param name: argument name, return true if argument exist
   bool has (const std::string &name);
 
-  /// <summary>
-  /// get argument by name, if not exist, return default argument
-  /// </summary>
-  /// <param name="name">argument name</param>
-  /// <param name="def">default argument</param>
-  /// <returns></returns>
+  // get argument by name, if not exist, return default argument
   const std::string get (const std::string &name, const std::string &def = "");
 
-  /// <summary>
-  /// get argument by name, if not exist, return default argument
-  /// </summary>
-  /// <param name="name">argument name</param>
-  /// <param name="def">default argument</param>
-  /// <returns></returns>
+  // get argument by name, if not exist, return default argument
   const int get (const std::string &name, const int &def);
 
-  /// <summary>
-  /// get argument by name, if not exist, return default argument
-  /// </summary>
-  /// <param name="name">argument name</param>
-  /// <param name="def">default argument</param>
-  /// <returns></returns>
+  // get argument by name, if not exist, return default argument
   const float get (const std::string &name, const float &def);
 
-  /// <summary>
-  /// Return the number of arguments has passed to program
-  /// </summary>
-  /// <returns></returns>
+  // Return the number of arguments has passed to program
   int getArgCount ();
 
-  /// <summary>
-  /// Get argument string
-  /// </summary>
-  /// <returns>A formatted string contains passed arguments and their
-  /// values</returns>
+  // Get argument string, return a formatted string contains passed arguments
+  // and their value
   std::string getArg ();
 
 private:
