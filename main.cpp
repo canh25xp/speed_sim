@@ -31,6 +31,7 @@ main (int argc, char **argv)
   cout << num_sensors << endl;
   cout << sampling << endl;
   cout << interval << endl;
+  cout << "Simulation started..." << endl;
 
   // Open file for writing
   ofstream outputFile (SAVE_NAME);
