@@ -39,7 +39,7 @@ main (int argc, char **argv)
     }
 
   // Write header to CSV file
-  outputFile << "Sensor ID, Timestamp, Speed (rpm)" << endl;
+  outputFile << "id,time,value" << endl;
 
   // Simulation loop
   time_t start_time = time (nullptr);
