@@ -1,11 +1,10 @@
 #include "simulation.hpp"
-#include "fstream"
+#include "csv.hpp"
+
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
-#include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <string>
 #include <thread>
 
@@ -34,7 +33,7 @@ getSensorValue ()
 
 void
 runSimulation (int num_sensors, int sampling, int interval,
-               std::ofstream &outputFile)
+               CSVHandler &csvHandler)
 {
   // Simulation loop
   for (int i = 1; i <= interval; i += sampling)
@@ -46,8 +45,8 @@ runSimulation (int num_sensors, int sampling, int interval,
           std::string timestamp = getCurrentTimestamp ();
 
           // Write data to file
-          outputFile << id << "," << timestamp << "," << std::fixed
-                     << std::setprecision (1) << speed << std::endl;
+          csvHandler.writeRow (
+              { std::to_string (id), timestamp, std::to_string (speed) });
         }
 
       // Wait for sampling time

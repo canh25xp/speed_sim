@@ -1,3 +1,4 @@
+#include "csv.hpp"
 #include "parser.hpp"
 #include "simulation.hpp"
 
@@ -22,21 +23,22 @@ main (int argc, char **argv)
   std::cout << parser.getArg ();
   std::cout << "Simulation started..." << std::endl;
 
+  // Create CSVHandler instance
+  CSVHandler csvHandler (SAVE_NAME);
+
   // Open file for writing
   std::ofstream outputFile (SAVE_NAME);
-  if (!outputFile)
+  if (!csvHandler.openFile ())
     {
-      std::cerr << "Error opening file." << std::endl;
       return 1;
     }
 
   // Write header to CSV file
-  outputFile << "id,time,value" << std::endl;
+  csvHandler.writeHeader ({ "id", "time", "value" });
 
-  // The interval should be convert to seconds before passing to the Simulation:
-  // interval*60*60
-  // However to save time, we will keep it as it.
-  runSimulation (num_sensors, sampling, interval, outputFile);
+  // The interval should be convert to seconds before passing to the
+  // Simulation: interval*60*60 However to save time, we will keep it as it.
+  runSimulation (num_sensors, sampling, interval, csvHandler);
 
   // Close file
   outputFile.close ();
