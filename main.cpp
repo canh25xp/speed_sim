@@ -1,3 +1,6 @@
+#include "parser.hpp"
+#include "sim.hpp"
+
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
@@ -5,8 +8,6 @@
 #include <iomanip>
 #include <iostream>
 #include <thread>
-
-#include "parser.hpp"
 
 #define SAVE_NAME "speed_data.csv"
 
@@ -16,11 +17,6 @@ int num_sensors = 0;
 int sampling = 0;
 int interval = 0;
 
-// Function to generate random speed within the specified range and resolution
-double generateSpeed ();
-// Function to generate timestamp in the format YYYY:MM:DD hh:mm:ss
-string generateTimestamp ();
-
 int
 main (int argc, char **argv)
 {
@@ -28,9 +24,6 @@ main (int argc, char **argv)
   num_sensors = parser.get ("-n", 1); // 1 sensor
   sampling = parser.get ("-st", 10);  // 10 seconds
   interval = parser.get ("-si", 1);   // 1 hour
-  /* cout << num_sensors << endl; */
-  /* cout << sampling << endl; */
-  /* cout << interval << endl; */
   cout << parser.getArg ();
   cout << "Simulation started..." << endl;
 
@@ -71,19 +64,3 @@ main (int argc, char **argv)
   return 0;
 }
 
-double
-generateSpeed ()
-{
-  return (rand () % 15001) / 5.0; // Generating random speed between 0 and 3000
-                                  // rpm with 0.2 rpm resolution
-}
-
-string
-generateTimestamp ()
-{
-  time_t current_time = time (nullptr);
-  struct tm *timeinfo = localtime (&current_time);
-  char timestamp[20];
-  strftime (timestamp, sizeof (timestamp), "%Y:%m:%d %H:%M:%S", timeinfo);
-  return string (timestamp);
-}
