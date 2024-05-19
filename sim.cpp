@@ -39,14 +39,14 @@ runSimulation (int num_sensors, int sampling, int interval,
   // Simulation loop
   for (int i = 1; i <= interval; i += sampling)
     {
-      for (int j = 1; j <= num_sensors; ++j)
+      for (int id = 1; id <= num_sensors; ++id)
         {
           // Generate random speed and timestamp
           double speed = getSensorValue ();
           std::string timestamp = getCurrentTimestamp ();
 
           // Write data to file
-          outputFile << j << "," << timestamp << "," << std::fixed
+          outputFile << id << "," << timestamp << "," << std::fixed
                      << std::setprecision (1) << speed << std::endl;
         }
 
