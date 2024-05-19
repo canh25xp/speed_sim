@@ -1,18 +1,13 @@
 #include "sim.hpp"
+#include "fstream"
+#include <chrono>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 #include <iomanip>
+#include <iostream>
 #include <string>
-
-std::string
-generateTimestamp ()
-{
-  time_t current_time = time (nullptr);
-  struct tm *timeinfo = localtime (&current_time);
-  char timestamp[20];
-  strftime (timestamp, sizeof (timestamp), "%Y:%m:%d %H:%M:%S", timeinfo);
-  return std::string (timestamp);
-}
+#include <thread>
 
 std::string
 getCurrentTimestamp ()
@@ -35,4 +30,27 @@ getSensorValue ()
 {
   // Generating random speed between 0 and 3000 rpm with 0.2 rpm resolution
   return (rand () % 15001) / 5.0;
+}
+
+void
+runSimulation (int num_sensors, int sampling, int interval,
+               std::ofstream &outputFile)
+{
+  // Simulation loop
+  for (int i = 1; i <= interval; i += sampling)
+    {
+      for (int j = 1; j <= num_sensors; ++j)
+        {
+          // Generate random speed and timestamp
+          double speed = getSensorValue ();
+          std::string timestamp = getCurrentTimestamp ();
+
+          // Write data to file
+          outputFile << j << "," << timestamp << "," << std::fixed
+                     << std::setprecision (1) << speed << std::endl;
+        }
+
+      // Wait for sampling time
+      std::this_thread::sleep_for (std::chrono::seconds (sampling));
+    }
 }
