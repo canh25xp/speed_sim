@@ -2,7 +2,6 @@
 #include "parser.hpp"
 #include "simulation.hpp"
 
-#include <fstream>
 #include <iostream>
 
 #define SAVE_NAME "speed_data.csv"
@@ -26,8 +25,6 @@ main (int argc, char **argv)
   // Create CSVHandler instance
   CSVHandler csvHandler (SAVE_NAME);
 
-  // Open file for writing
-  std::ofstream outputFile (SAVE_NAME);
   if (!csvHandler.openFile ())
     {
       return 1;
@@ -40,8 +37,8 @@ main (int argc, char **argv)
   // Simulation: interval*60*60 However to save time, we will keep it as it.
   runSimulation (num_sensors, sampling, interval, csvHandler);
 
-  // Close file
-  outputFile.close ();
+  // Close the file
+  csvHandler.closeFile ();
 
   std::cout << "Simulation completed. Data saved to " << SAVE_NAME
             << std::endl;
