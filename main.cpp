@@ -33,7 +33,9 @@ main (int argc, char **argv)
   // Write header to CSV file
   outputFile << "id,time,value" << std::endl;
 
-  // Simulation loop
+  // The interval should be convert to seconds before passing to the Simulation:
+  // interval*60*60
+  // However to save time, we will keep it as it.
   runSimulation (num_sensors, sampling, interval, outputFile);
 
   // Close file
