@@ -11,8 +11,6 @@
 
 #define SAVE_NAME "speed_data.csv"
 
-using namespace std;
-
 int num_sensors = 0;
 int sampling = 0;
 int interval = 0;
@@ -26,43 +24,42 @@ main (int argc, char **argv)
   sampling = parser.get ("-st", 10);  // 10 seconds
   interval = parser.get ("-si", 1);   // 1 hour
 
-  cout << parser.getArg ();
-  cout << "Simulation started..." << endl;
+  std::cout << parser.getArg ();
+  std::cout << "Simulation started..." << std::endl;
 
   // Open file for writing
-  ofstream outputFile (SAVE_NAME);
+  std::ofstream outputFile (SAVE_NAME);
   if (!outputFile)
     {
-      cerr << "Error opening file." << endl;
+      std::cerr << "Error opening file." << std::endl;
       return 1;
     }
 
   // Write header to CSV file
-  outputFile << "id,time,value" << endl;
+  outputFile << "id,time,value" << std::endl;
 
   // Simulation loop
-  time_t start_time = time (nullptr);
   for (int i = 1; i <= interval; i += sampling)
     {
       for (int j = 1; j <= num_sensors; ++j)
         {
           // Generate random speed and timestamp
           double speed = getSensorValue ();
-          string timestamp = getCurrentTimestamp ();
+          std::string timestamp = getCurrentTimestamp ();
 
           // Write data to file
-          outputFile << j << "," << timestamp << "," << fixed
-                     << setprecision (1) << speed << endl;
+          outputFile << j << "," << timestamp << "," << std::fixed
+                     << std::setprecision (1) << speed << std::endl;
         }
 
       // Wait for sampling time
-      this_thread::sleep_for (chrono::seconds (sampling));
+      std::this_thread::sleep_for (std::chrono::seconds (sampling));
     }
 
   // Close file
   outputFile.close ();
 
-  cout << "Simulation completed. Data saved to " << SAVE_NAME << endl;
+  std::cout << "Simulation completed. Data saved to " << SAVE_NAME << std::endl;
   return 0;
 }
 
