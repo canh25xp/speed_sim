@@ -21,9 +21,11 @@ int
 main (int argc, char **argv)
 {
   Parser parser (argc, argv);
+
   num_sensors = parser.get ("-n", 1); // 1 sensor
   sampling = parser.get ("-st", 10);  // 10 seconds
   interval = parser.get ("-si", 1);   // 1 hour
+
   cout << parser.getArg ();
   cout << "Simulation started..." << endl;
 
@@ -45,8 +47,8 @@ main (int argc, char **argv)
       for (int j = 1; j <= num_sensors; ++j)
         {
           // Generate random speed and timestamp
-          double speed = generateSpeed ();
-          string timestamp = generateTimestamp ();
+          double speed = getSensorValue ();
+          string timestamp = getCurrentTimestamp ();
 
           // Write data to file
           outputFile << j << "," << timestamp << "," << fixed

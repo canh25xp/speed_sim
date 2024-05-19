@@ -1,4 +1,5 @@
 #include "sim.hpp"
+#include <cstdlib>
 #include <ctime>
 #include <iomanip>
 #include <string>
@@ -30,7 +31,7 @@ getCurrentTimestamp ()
 }
 
 double
-generateSpeed ()
+getSensorValue ()
 {
   // Generating random speed between 0 and 3000 rpm with 0.2 rpm resolution
   return (rand () % 15001) / 5.0;

@@ -4,4 +4,4 @@ std::string generateTimestamp ();
 
 std::string getCurrentTimestamp ();
 
-double generateSpeed ();
+double getSensorValue ();
