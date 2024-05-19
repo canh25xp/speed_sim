@@ -1,5 +1,5 @@
 #include "parser.hpp"
-#include "sim.hpp"
+#include "simulation.hpp"
 
 #include <fstream>
 #include <iostream>

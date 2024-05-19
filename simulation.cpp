@@ -1,4 +1,4 @@
-#include "sim.hpp"
+#include "simulation.hpp"
 #include "fstream"
 #include <chrono>
 #include <cstdlib>
