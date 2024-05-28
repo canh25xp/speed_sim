@@ -1,5 +1,6 @@
 #include "parser.hpp"
 #include <algorithm>
+#include <stdexcept>
 
 Parser::Parser (int &argc, char **argv)
 {
@@ -28,10 +29,15 @@ Parser::get (const std::string &name, const std::string &def)
   std::string ret = def;
 
   auto itr = std::find (this->tokens.begin (), this->tokens.end (), name);
-  if (itr != this->tokens.end () && ++itr != this->tokens.end ())
+  if (itr != this->tokens.end () && ++itr != this->tokens.end ()
+      && (*itr).find ("-") != 0)
     {
       argCount++;
       ret = *itr;
+    }
+  else if (itr == this->tokens.end () || (*itr).find ("-") == 0)
+    {
+      throw std::invalid_argument ("Missing value for argument: " + name);
     }
 
   arguments.push_back (Argument (name, ret));
