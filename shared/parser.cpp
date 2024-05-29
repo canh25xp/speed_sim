@@ -29,15 +29,19 @@ Parser::get (const std::string &name, const std::string &def)
   std::string ret = def;
 
   auto itr = std::find (this->tokens.begin (), this->tokens.end (), name);
-  if (itr != this->tokens.end () && ++itr != this->tokens.end ()
-      && (*itr).find ("-") != 0)
+  if (itr != this->tokens.end ())
     {
-      argCount++;
-      ret = *itr;
-    }
-  else if (itr == this->tokens.end () || (*itr).find ("-") == 0)
-    {
-      throw std::invalid_argument ("Missing value for argument: " + name);
+      if ((itr + 1) != this->tokens.end () && (*(itr + 1)).find ("-") != 0)
+        {
+          // Argument found with a value
+          argCount++;
+          ret = *(itr + 1);
+        }
+      else
+        {
+          // Argument found without a value
+          throw std::invalid_argument ("Missing value for argument: " + name);
+        }
     }
 
   arguments.push_back (Argument (name, ret));
