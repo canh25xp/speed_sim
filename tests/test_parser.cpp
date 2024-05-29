@@ -6,9 +6,9 @@ main (int argc, char **argv)
 {
   Parser parser (argc, argv);
 
-  int arg1 = parser.get ("-a", 1);
-  int arg2 = parser.get ("-b", 10);
-  int arg3 = parser.get ("-c", 1);
+  int arg1 = parser.get ("-a", 0);
+  int arg2 = parser.get ("-b", 0);
+  int arg3 = parser.get ("-c", 0);
 
   std::cout << parser.getArg () << std::endl;
 
