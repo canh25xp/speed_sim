@@ -9,7 +9,7 @@
 #include <vector>
 
 const int LOWER_BOUND = 850;
-const int UPPER_BOUND = 850;
+const int UPPER_BOUND = 1650;
 
 struct SpeedData
 {
