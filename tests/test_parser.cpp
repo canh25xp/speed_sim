@@ -11,6 +11,11 @@ main (int argc, char **argv)
   int arg3 = parser.get ("-c", 0);
 
   std::cout << parser.getArg () << std::endl;
+  for (int i = 0; i < parser.getPositionalArgCount (); ++i)
+    {
+      std::cout << "Positional argument " << i << ": "
+                << parser.getPositional (i) << std::endl;
+    }
 
   std::cout << arg1 << std::endl;
   std::cout << arg2 << std::endl;
