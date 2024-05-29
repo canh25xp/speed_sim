@@ -12,3 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR}/shared)
 add_subdirectory(task_1)
 add_subdirectory(task_2)
 add_subdirectory(task_3)
+
+# Add subdirectory for tests
+# enable_testing()
+add_subdirectory(tests)
