@@ -1,4 +1,4 @@
-add_executable(speed_process main.cpp ../shared/csv.cpp ../shared/parser.cpp)
+add_executable(speed_process main.cpp process.cpp ../shared/csv.cpp ../shared/parser.cpp)
 
 target_link_libraries(speed_process PUBLIC compiler_flags)
 
