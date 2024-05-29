@@ -4,8 +4,26 @@
 
 Parser::Parser (int &argc, char **argv)
 {
+  bool expectValue = false;
   for (int i = 1; i < argc; ++i)
-    this->tokens.push_back (std::string (argv[i]));
+    {
+      std::string token = std::string (argv[i]);
+      if (token.find ("-") == 0)
+        {
+          tokens.push_back (token);
+          expectValue = true;
+        }
+      else if (expectValue)
+        {
+          tokens.push_back (token);
+          expectValue = false;
+        }
+      else
+        {
+          positionalArguments.push_back (token);
+          positionalArgCount++;
+        }
+    }
 }
 
 bool
@@ -14,9 +32,17 @@ Parser::has (const std::string &name)
   auto itr = std::find (this->tokens.begin (), this->tokens.end (), name);
   if (itr != this->tokens.end ())
     {
-      arguments.push_back (Argument (name, "true"));
-      argCount++;
-      return true;
+      if ((itr + 1) != this->tokens.end () && (*(itr + 1)).find ("-") != 0)
+        {
+          arguments.push_back (Argument (name, "true"));
+          argCount++;
+          return true;
+        }
+      else
+        {
+          arguments.push_back (Argument (name, "false"));
+          return false;
+        }
     }
 
   arguments.push_back (Argument (name, "false"));
@@ -58,6 +84,22 @@ const float
 Parser::get (const std::string &name, const float &def)
 {
   return std::stof (get (name, std::to_string (def)));
+}
+
+const std::string
+Parser::getPositional (int index, const std::string &def)
+{
+  if (index < positionalArguments.size ())
+    {
+      return positionalArguments[index];
+    }
+  return def;
+}
+
+int
+Parser::getPositionalArgCount ()
+{
+  return positionalArgCount;
 }
 
 int

@@ -42,10 +42,20 @@ public:
   // and their value
   std::string getArg ();
 
+  // Get positional argument by index
+  const std::string getPositional (int index, const std::string &def = "");
+
+  // Return the number of positional arguments
+  int getPositionalArgCount ();
+
 private:
   std::vector<std::string> tokens;
 
   std::vector<Argument> arguments;
 
+  std::vector<std::string> positionalArguments;
+
   int argCount = 0;
+
+  int positionalArgCount = 0;
 };
