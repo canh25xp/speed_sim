@@ -1,7 +1,8 @@
 #pragma once
-#include "csv.hpp"
 
 #include <string>
+
+class CSVHandler;
 
 std::string getCurrentTimestamp ();
 
