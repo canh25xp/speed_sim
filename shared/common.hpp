@@ -5,6 +5,7 @@
 #define VALID_FILE_NAME "valid_speed_data.csv"
 #define OUTLIER_FILE_NAME "outlier_data.csv"
 #define SUMMARY_FILE_NAME "data_summary.csv"
+#define SORTED_FILE_NAME "sorted_speed_data.csv"
 
 struct SpeedData
 {
