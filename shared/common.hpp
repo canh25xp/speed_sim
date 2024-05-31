@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#define SAVE_NAME "speed_data.csv"
+
 struct SpeedData {
     int id;
     std::string time;

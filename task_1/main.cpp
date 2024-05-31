@@ -1,10 +1,9 @@
 #include "csv.hpp"
 #include "parser.hpp"
 #include "simulation.hpp"
+#include "common.hpp"
 
 #include <iostream>
-
-#define SAVE_NAME "speed_data.csv"
 
 int num_sensors = 0;
 int sampling = 0;
