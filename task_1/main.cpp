@@ -27,7 +27,7 @@ main (int argc, char **argv)
 
   csvHandler.writeHeader ({ "id", "time", "value" });
 
-  // The interval should be normalize to seconds before passing to the function:interval*60*60
+  // The interval should be normalize to seconds before passing to the function: interval*60*60
   // However to save time, we will keep it as it.
   runSimulation (num_sensors, sampling, interval, csvHandler);
 
