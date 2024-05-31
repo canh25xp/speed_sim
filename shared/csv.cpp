@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 CSVHandler::CSVHandler (const std::string &filename)
     : filename (filename), fileOpened (false)
@@ -58,4 +59,35 @@ CSVHandler::writeRow (const std::vector<std::string> &row)
         }
     }
   outputFile << std::endl;
+}
+
+std::vector<std::vector<std::string> >
+CSVHandler::readFile ()
+{
+  inputFile.open (filename);
+  if (!inputFile)
+    {
+      std::cerr << "Error opening file for reading: " << filename << std::endl;
+      return {};
+    }
+
+  std::vector<std::vector<std::string> > data;
+  std::string line;
+
+  while (getline (inputFile, line))
+    {
+      std::istringstream ss (line);
+      std::vector<std::string> row;
+      std::string cell;
+
+      while (getline (ss, cell, ','))
+        {
+          row.push_back (cell);
+        }
+
+      data.push_back (row);
+    }
+
+  inputFile.close ();
+  return data;
 }
