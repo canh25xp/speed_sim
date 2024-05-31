@@ -5,6 +5,7 @@
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 #include <string>
 #include <thread>
 
@@ -32,9 +33,9 @@ getSensorValue ()
 }
 
 void
-runSimulation (int num_sensors, int sampling, int interval,
-               CSVHandler &csvHandler)
+runSimulation (int num_sensors, int sampling, int interval, CSVHandler &csvHandler)
 {
+  std::cout << "Simulation started." << std::endl;
   // Simulation loop
   for (int i = 1; i <= interval; i += sampling)
     {
@@ -43,10 +44,11 @@ runSimulation (int num_sensors, int sampling, int interval,
           double speed = getSensorValue ();
           std::string timestamp = getCurrentTimestamp ();
           SpeedData speedData = { id, timestamp, speed };
-          csvHandler.writeRow(speedData);
+          csvHandler.writeRow (speedData);
         }
 
       // Wait for sampling time
       std::this_thread::sleep_for (std::chrono::seconds (sampling));
     }
+  std::cout << "Simulation completed." << std::endl;
 }

@@ -17,7 +17,6 @@ main (int argc, char **argv)
   // clang-format on
 
   std::cout << parser.getArg ();
-  std::cout << "Simulation started..." << std::endl;
 
   // Create CSVHandler instance
   CSVHandler csvHandler (DATA_FILE_NAME);
@@ -37,6 +36,5 @@ main (int argc, char **argv)
   // Close the file
   csvHandler.closeFile ();
 
-  std::cout << "Simulation completed. Data saved to " << DATA_FILE_NAME << std::endl;
   return 0;
 }
