@@ -13,8 +13,8 @@ main (int argc, char **argv)
   std::cout << parser.getArg () << std::endl;
   for (int i = 0; i < parser.getPositionalArgCount (); ++i)
     {
-      std::cout << "Positional argument " << i << ": "
-                << parser.getPositional (i) << std::endl;
+      std::cout << "Positional argument " << i << ": " << parser.get (i)
+                << std::endl;
     }
 
   std::cout << arg1 << std::endl;

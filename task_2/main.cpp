@@ -8,7 +8,8 @@ main (int argc, char *argv[])
 {
   Parser parser (argc, argv);
 
-  std::string filename = parser.getPositional (0, DATA_FILE_NAME);
+  std::string filename = parser.get (0, DATA_FILE_NAME);
+  bool sort            = parser.has("-s");
 
   processFile (filename);
   return 0;

@@ -87,7 +87,7 @@ Parser::get (const std::string &name, const float &def)
 }
 
 const std::string
-Parser::getPositional (int index, const std::string &def)
+Parser::get (int index, const std::string &def)
 {
   if (index < positionalArguments.size ())
     {
