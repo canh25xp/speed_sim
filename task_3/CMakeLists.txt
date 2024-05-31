@@ -1,4 +1,4 @@
-add_executable(speed_comm main.cpp simulation.cpp ../shared/csv.cpp ../shared/parser.cpp)
+add_executable(speed_comm main.cpp)
 
 target_link_libraries(speed_comm PUBLIC compiler_flags)
 
