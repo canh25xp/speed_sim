@@ -5,18 +5,14 @@
 
 #include <iostream>
 
-int num_sensors = 0;
-int sampling = 0;
-int interval = 0;
-
 int
 main (int argc, char **argv)
 {
   Parser parser (argc, argv);
 
-  num_sensors = parser.get ("-n", 1); // 1 sensor
-  sampling = parser.get ("-st", 10);  // 10 seconds
-  interval = parser.get ("-si", 1);   // 1 hour
+  int num_sensors = parser.get ("-n", 1); // 1 sensor
+  int sampling = parser.get ("-st", 10);  // 10 seconds
+  int interval = parser.get ("-si", 1);   // 1 hour
 
   std::cout << parser.getArg ();
   std::cout << "Simulation started..." << std::endl;
