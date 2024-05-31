@@ -20,7 +20,7 @@ main (int argc, char **argv)
 
   CSVHandler csvHandler (DATA_FILE_NAME);
 
-  if (!csvHandler.openFile ())
+  if (!csvHandler.openFile (std::ios::out))
     {
       return 1;
     }

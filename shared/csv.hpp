@@ -12,7 +12,7 @@ public:
   CSVHandler (const std::string &filename);
   ~CSVHandler ();
 
-  bool openFile ();
+  bool openFile (std::ios_base::openmode mode);
   void closeFile ();
   void writeHeader (const std::vector<std::string> &headers);
   void writeRow (const std::vector<std::string> &row);
@@ -22,7 +22,5 @@ public:
 
 private:
   std::string fileName;
-  std::ofstream outputFile;
-  std::ifstream inputFile;
-  bool fileOpened;
+  std::fstream fileStream;
 };

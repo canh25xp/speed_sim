@@ -34,9 +34,10 @@ processFile (const std::string &filename)
   CSVHandler outlierFile (OUTLIER_FILE_NAME);
   CSVHandler summaryFile (SUMMARY_FILE_NAME);
 
-  validFile.openFile ();
-  outlierFile.openFile ();
-  summaryFile.openFile ();
+  inputFile.openFile (std::ios::in);
+  validFile.openFile (std::ios::out);
+  outlierFile.openFile (std::ios::out);
+  summaryFile.openFile (std::ios::out);
 
   std::vector<SpeedData> outliers;
   std::vector<SpeedData> validData;

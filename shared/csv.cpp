@@ -8,35 +8,28 @@
 #include <vector>
 
 CSVHandler::CSVHandler (const std::string &fileName)
-    : fileName (fileName), fileOpened (false)
+    : fileName (fileName)
 {
 }
 
 CSVHandler::~CSVHandler ()
 {
-  this->closeFile ();
+  CSVHandler::closeFile ();
 }
 
 bool
-CSVHandler::openFile ()
+CSVHandler::openFile (std::ios_base::openmode mode)
 {
-  outputFile.open (fileName);
-  if (!outputFile)
-    {
-      std::cerr << "Error opening file: " << fileName << std::endl;
-      return false;
-    }
-  fileOpened = true;
-  return true;
+  fileStream.open (fileName, mode);
+  return fileStream.is_open ();
 }
 
 void
 CSVHandler::closeFile ()
 {
-  if (fileOpened)
+  if (fileStream.is_open ())
     {
-      outputFile.close ();
-      fileOpened = false;
+      fileStream.close ();
     }
 }
 
@@ -45,13 +38,13 @@ CSVHandler::writeHeader (const std::vector<std::string> &headers)
 {
   for (size_t i = 0; i < headers.size (); ++i)
     {
-      outputFile << headers[i];
+      fileStream << headers[i];
       if (i < headers.size () - 1)
         {
-          outputFile << ",";
+          fileStream << ",";
         }
     }
-  outputFile << std::endl;
+  fileStream << std::endl;
 }
 
 void
@@ -59,13 +52,13 @@ CSVHandler::writeRow (const std::vector<std::string> &row)
 {
   for (size_t i = 0; i < row.size (); ++i)
     {
-      outputFile << row[i];
+      fileStream << row[i];
       if (i < row.size () - 1)
         {
-          outputFile << ",";
+          fileStream << ",";
         }
     }
-  outputFile << std::endl;
+  fileStream << std::endl;
 }
 
 void
@@ -87,8 +80,7 @@ CSVHandler::writeRow (const SpeedDataSummary &data)
 std::vector<std::vector<std::string> >
 CSVHandler::readFile ()
 {
-  inputFile.open (fileName);
-  if (!inputFile)
+  if (!fileStream.is_open () || fileStream.eof ())
     {
       std::cerr << "Error opening file for reading: " << fileName << std::endl;
       return {};
@@ -97,9 +89,9 @@ CSVHandler::readFile ()
   std::vector<std::vector<std::string> > data;
   std::string line;
 
-  std::getline (inputFile, line); // Read header
+  std::getline (fileStream, line); // Read header
 
-  while (getline (inputFile, line))
+  while (getline (fileStream, line))
     {
       std::istringstream ss (line);
       std::vector<std::string> row;
@@ -113,6 +105,6 @@ CSVHandler::readFile ()
       data.push_back (row);
     }
 
-  inputFile.close ();
+  fileStream.close ();
   return data;
 }
