@@ -1,11 +1,11 @@
 #include "csv.hpp"
 #include "common.hpp"
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
-#include <iomanip>
 
 CSVHandler::CSVHandler (const std::string &filename)
     : filename (filename), fileOpened (false)
@@ -63,10 +63,12 @@ CSVHandler::writeRow (const std::vector<std::string> &row)
   outputFile << std::endl;
 }
 
-void CSVHandler::writeRow(const SpeedData& data) {
-    std::ostringstream oss;
-    oss << std::fixed << std::setprecision(1) << data.value;
-    writeRow({std::to_string(data.id), data.time, oss.str()});
+void
+CSVHandler::writeRow (const SpeedData &data)
+{
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision (1) << data.value;
+  writeRow ({ std::to_string (data.id), data.time, oss.str () });
 }
 
 std::vector<std::vector<std::string> >
