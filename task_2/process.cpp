@@ -67,10 +67,7 @@ processFile (const std::string &filename)
       std::getline (ss, timeStr, ',');
       std::getline (ss, valueStr, ',');
 
-      SpeedData data;
-      data.id = std::stoi (idStr);
-      data.time = timeStr;
-      data.value = std::stod (valueStr);
+      SpeedData data = { std::stoi (idStr), timeStr, std::stod (valueStr) };
 
       if (data.value < LOWER_BOUND || data.value > UPPER_BOUND)
         {
@@ -103,14 +100,12 @@ processFile (const std::string &filename)
 
   for (const auto &data : outliers)
     {
-      outlierFile.writeRow ({ std::to_string (data.id), data.time,
-                              std::to_string (data.value) });
+      outlierFile.writeRow (data);
     }
 
   for (const auto &data : validData)
     {
-      validFile.writeRow ({ std::to_string (data.id), data.time,
-                            std::to_string (data.value) });
+      validFile.writeRow (data);
     }
 
   for (const auto &sensorData : summaries)
