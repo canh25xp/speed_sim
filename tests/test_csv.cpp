@@ -5,7 +5,7 @@
 int
 main ()
 {
-  CSVHandler csvHandler ("test.csv");
+  csv::CSVHandler csvHandler ("test.csv");
 
   // Reading data from the CSV file
   std::vector<std::vector<std::string> > data = csvHandler.readFile ();

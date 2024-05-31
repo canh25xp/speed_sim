@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+using namespace csv;
+
 CSVHandler::CSVHandler (const std::string &fileName)
     : fileName (fileName)
 {

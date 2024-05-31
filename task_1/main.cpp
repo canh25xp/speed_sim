@@ -18,7 +18,7 @@ main (int argc, char **argv)
 
   std::cout << parser.getArg ();
 
-  CSVHandler csvHandler (DATA_FILE_NAME);
+  csv::CSVHandler csvHandler (DATA_FILE_NAME);
 
   if (!csvHandler.openFile (std::ios::out))
     {

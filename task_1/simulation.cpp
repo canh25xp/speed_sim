@@ -33,7 +33,7 @@ getSensorValue ()
 }
 
 void
-runSimulation (int num_sensors, int sampling, int interval, CSVHandler &csvHandler)
+runSimulation (int num_sensors, int sampling, int interval, csv::CSVHandler &csvHandler)
 {
   std::cout << "Simulation started." << std::endl;
   // Simulation loop

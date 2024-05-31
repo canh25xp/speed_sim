@@ -29,10 +29,10 @@ formatTime (const std::tm &tm)
 void
 processFile (const std::string &filename)
 {
-  CSVHandler inputFile (filename);
-  CSVHandler validFile (VALID_FILE_NAME);
-  CSVHandler outlierFile (OUTLIER_FILE_NAME);
-  CSVHandler summaryFile (SUMMARY_FILE_NAME);
+  csv::CSVHandler inputFile (filename);
+  csv::CSVHandler validFile (VALID_FILE_NAME);
+  csv::CSVHandler outlierFile (OUTLIER_FILE_NAME);
+  csv::CSVHandler summaryFile (SUMMARY_FILE_NAME);
 
   inputFile.openFile (std::ios::in);
   validFile.openFile (std::ios::out);

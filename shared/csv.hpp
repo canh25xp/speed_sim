@@ -6,6 +6,9 @@
 struct SpeedData;
 struct SpeedDataSummary;
 
+namespace csv
+{
+
 class CSVHandler
 {
 public:
@@ -24,3 +27,4 @@ private:
   std::string fileName;
   std::fstream fileStream;
 };
+} // namespace csv
