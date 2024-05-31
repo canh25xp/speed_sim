@@ -30,3 +30,6 @@ cmake .. -G "MinGW Makefiles"   # Windows
 cmake .. -G "Unix Makefiles"    # Linux
 cmake --build .                 # Or just `make` is enough
 ```
+
+The Binary should be located under `./build/bin`
+
