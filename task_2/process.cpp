@@ -4,7 +4,6 @@
 #include <ctime>
 #include <format>
 #include <iomanip>
-#include <iostream>
 #include <map>
 #include <sstream>
 #include <string>
@@ -35,12 +34,9 @@ processFile (const std::string &filename)
   CSVHandler outlierFile (OUTLIER_FILE_NAME);
   CSVHandler summaryFile (SUMMARY_FILE_NAME);
 
-  if (!validFile.openFile () || !outlierFile.openFile ()
-      || !summaryFile.openFile ())
-    {
-      std::cerr << "Could not open the output files." << std::endl;
-      return;
-    }
+  validFile.openFile ();
+  outlierFile.openFile ();
+  summaryFile.openFile ();
 
   std::vector<SpeedData> outliers;
   std::vector<SpeedData> validData;
@@ -117,8 +113,4 @@ processFile (const std::string &filename)
           summaryFile.writeRow (avg);
         }
     }
-
-  validFile.closeFile ();
-  outlierFile.closeFile ();
-  summaryFile.closeFile ();
 }

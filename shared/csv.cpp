@@ -12,6 +12,11 @@ CSVHandler::CSVHandler (const std::string &filename)
 {
 }
 
+CSVHandler::~CSVHandler ()
+{
+  this->closeFile();
+}
+
 bool
 CSVHandler::openFile ()
 {

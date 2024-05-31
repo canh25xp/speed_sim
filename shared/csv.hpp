@@ -10,6 +10,8 @@ class CSVHandler
 {
 public:
   CSVHandler (const std::string &filename);
+  ~CSVHandler ();
+
   bool openFile ();
   void closeFile ();
   void writeHeader (const std::vector<std::string> &headers);
