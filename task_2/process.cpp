@@ -1,4 +1,5 @@
 #include "process.hpp"
+#include "common.hpp"
 #include "csv.hpp"
 #include <cmath>
 #include <ctime>
@@ -9,23 +10,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-struct SpeedData
-{
-  int id;
-  std::string time;
-  double value;
-};
-
-struct SummaryData
-{
-  std::string max_time;
-  double max_value;
-  std::string min_time;
-  double min_value;
-  double sum;
-  int count;
-};
 
 std::tm
 parseTime (const std::string &timeStr)

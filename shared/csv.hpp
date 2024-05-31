@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+struct SpeedData;
+
 class CSVHandler
 {
 public:
@@ -11,6 +13,7 @@ public:
   void closeFile ();
   void writeHeader (const std::vector<std::string> &headers);
   void writeRow (const std::vector<std::string> &row);
+  void writeRow (const SpeedData &data);
   std::vector<std::vector<std::string> > readFile ();
 
 private:

@@ -1,4 +1,5 @@
 #include "simulation.hpp"
+#include "common.hpp"
 #include "csv.hpp"
 
 #include <chrono>
@@ -43,13 +44,9 @@ runSimulation (int num_sensors, int sampling, int interval,
           // Generate random speed and timestamp
           double speed = getSensorValue ();
           std::string timestamp = getCurrentTimestamp ();
-          // Format speed with one decimal place
-          std::ostringstream oss;
-          oss << std::fixed << std::setprecision (1) << speed;
-
+          SpeedData speedData = { id, timestamp, speed };
           // Write data to file
-          csvHandler.writeRow (
-              { std::to_string (id), timestamp, oss.str() });
+          csvHandler.writeRow(speedData);
         }
 
       // Wait for sampling time
