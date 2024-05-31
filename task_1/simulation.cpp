@@ -5,7 +5,6 @@
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
-#include <iomanip>
 #include <string>
 #include <thread>
 
@@ -41,11 +40,9 @@ runSimulation (int num_sensors, int sampling, int interval,
     {
       for (int id = 1; id <= num_sensors; ++id)
         {
-          // Generate random speed and timestamp
           double speed = getSensorValue ();
           std::string timestamp = getCurrentTimestamp ();
           SpeedData speedData = { id, timestamp, speed };
-          // Write data to file
           csvHandler.writeRow(speedData);
         }
 
