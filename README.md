@@ -1,6 +1,6 @@
 # Speed sensor simulation and data analaysis Mini Project
 
-## How to compile
+## How to build
 
 ### Prerequisites
 
