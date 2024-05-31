@@ -11,6 +11,7 @@ git, cmake, g++
 ```pwsh
 winget install Git.Git
 winget install Kitware.CMake
+choco install mingw
 ```
 
 #### Ubuntu/Debian
@@ -25,6 +26,7 @@ sudo apt install git cmake g++
 git clone https://github.com/canh25xp/speed_sim
 mkdir build
 cd build
-cmake ..
-cmake --build .
+cmake .. -G "MinGW Makefiles"   # Windows
+cmake .. -G "Unix Makefiles"    # Linux
+cmake --build .                 # Or just `make` is enough
 ```
