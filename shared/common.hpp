@@ -6,24 +6,27 @@
 #define OUTLIER_FILE_NAME "outlier_data.csv"
 #define SUMMARY_FILE_NAME "data_summary.csv"
 
-struct SpeedData {
-    int id;
-    std::string time;
-    double value;
+struct SpeedData
+{
+  int id;
+  std::string time;
+  double value;
 };
 
-struct SpeedDataSummary {
-    int id;
-    std::string parameter;
-    std::string time;
-    double value;
+struct SpeedDataSummary
+{
+  int id;
+  std::string parameter;
+  std::string time;
+  double value;
 };
 
-struct SummaryData {
-    std::string max_time;
-    double max_value;
-    std::string min_time;
-    double min_value;
-    double sum;
-    int count;
+struct SummaryData
+{
+  std::string max_time;
+  double max_value;
+  std::string min_time;
+  double min_value;
+  double sum;
+  int count;
 };
