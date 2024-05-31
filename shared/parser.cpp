@@ -32,17 +32,9 @@ Parser::has (const std::string &name)
   auto itr = std::find (this->tokens.begin (), this->tokens.end (), name);
   if (itr != this->tokens.end ())
     {
-      if ((itr + 1) != this->tokens.end () && (*(itr + 1)).find ("-") != 0)
-        {
-          arguments.push_back (Argument (name, "true"));
-          argCount++;
-          return true;
-        }
-      else
-        {
-          arguments.push_back (Argument (name, "false"));
-          return false;
-        }
+      arguments.push_back (Argument (name, "true"));
+      argCount++;
+      return true;
     }
 
   arguments.push_back (Argument (name, "false"));
