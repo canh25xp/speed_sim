@@ -1,4 +1,4 @@
-add_executable(speed_comm main.cpp)
+add_executable(speed_comm main.cpp ../shared/parser.cpp)
 
 target_link_libraries(speed_comm PUBLIC compiler_flags)
 
