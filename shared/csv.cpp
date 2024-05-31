@@ -71,6 +71,15 @@ CSVHandler::writeRow (const SpeedData &data)
   writeRow ({ std::to_string (data.id), data.time, oss.str () });
 }
 
+void
+CSVHandler::writeRow (const SpeedDataSummary &data)
+{
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision (1) << data.value;
+  writeRow (
+      { std::to_string (data.id), data.parameter, data.time, oss.str () });
+}
+
 std::vector<std::vector<std::string> >
 CSVHandler::readFile ()
 {

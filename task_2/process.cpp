@@ -3,6 +3,7 @@
 #include "csv.hpp"
 #include <cmath>
 #include <ctime>
+#include <format>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -51,9 +52,6 @@ processFile (const std::string &filename)
 
   std::string line;
   std::getline (inputFile, line); // Read header
-  validFile.writeHeader ({ "id", "time", "value" });
-  outlierFile.writeHeader ({ "id", "time", "value" });
-  summaryFile.writeHeader ({ "id", "parameter", "time", "value" });
 
   std::vector<SpeedData> outliers;
   std::vector<SpeedData> validData;
@@ -98,16 +96,21 @@ processFile (const std::string &filename)
         }
     }
 
+  outlierFile.writeRow (
+      { std::format ("number of outliers: {}", outliers.size ()) });
+  outlierFile.writeHeader ({ "id", "time", "value" });
   for (const auto &data : outliers)
     {
       outlierFile.writeRow (data);
     }
 
+  validFile.writeHeader ({ "id", "time", "value" });
   for (const auto &data : validData)
     {
       validFile.writeRow (data);
     }
 
+  summaryFile.writeHeader ({ "id", "parameter", "time", "value" });
   for (const auto &sensorData : summaries)
     {
       int id = sensorData.first;
@@ -116,13 +119,15 @@ processFile (const std::string &filename)
           const std::string &hourTime = hourlyData.first;
           const SummaryData &summary = hourlyData.second;
           double mean = summary.sum / summary.count;
+          SpeedDataSummary max{ id, "max", summary.max_time,
+                                summary.max_value };
+          SpeedDataSummary min{ id, "min", summary.min_time,
+                                summary.min_value };
+          SpeedDataSummary avg{ id, "mean", hourTime, summary.max_value };
 
-          summaryFile.writeRow ({ std::to_string (id), "max", summary.max_time,
-                                  std::to_string (summary.max_value) });
-          summaryFile.writeRow ({ std::to_string (id), "min", summary.min_time,
-                                  std::to_string (summary.min_value) });
-          summaryFile.writeRow ({ std::to_string (id), "mean", hourTime,
-                                  std::to_string (mean) });
+          summaryFile.writeRow (max);
+          summaryFile.writeRow (min);
+          summaryFile.writeRow (avg);
         }
     }
 

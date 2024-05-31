@@ -9,6 +9,13 @@ struct SpeedData {
     double value;
 };
 
+struct SpeedDataSummary {
+    int id;
+    std::string parameter;
+    std::string time;
+    double value;
+};
+
 struct SummaryData {
     std::string max_time;
     double max_value;
