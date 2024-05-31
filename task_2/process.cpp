@@ -3,7 +3,6 @@
 #include "csv.hpp"
 #include <ctime>
 #include <format>
-#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <map>
@@ -31,16 +30,10 @@ formatTime (const std::tm &tm)
 void
 processFile (const std::string &filename)
 {
-  std::ifstream inputFile (filename);
+  CSVHandler inputFile (filename);
   CSVHandler validFile ("valid_speed_data.csv");
   CSVHandler outlierFile ("outlier_data.csv");
   CSVHandler summaryFile ("data_summary.csv");
-
-  if (!inputFile.is_open ())
-    {
-      std::cerr << "Could not open the file: " << filename << std::endl;
-      return;
-    }
 
   if (!validFile.openFile () || !outlierFile.openFile ()
       || !summaryFile.openFile ())
@@ -49,20 +42,15 @@ processFile (const std::string &filename)
       return;
     }
 
-  std::string line;
-  std::getline (inputFile, line); // Read header
-
   std::vector<SpeedData> outliers;
   std::vector<SpeedData> validData;
   std::map<int, std::map<std::string, SummaryData> > summaries;
 
-  while (std::getline (inputFile, line))
+  for (const auto &row : inputFile.readFile ())
     {
-      std::istringstream ss (line);
-      std::string idStr, timeStr, valueStr;
-      std::getline (ss, idStr, ',');
-      std::getline (ss, timeStr, ',');
-      std::getline (ss, valueStr, ',');
+      std::string idStr = row[0];
+      std::string timeStr = row[1];
+      std::string valueStr = row[2];
 
       SpeedData data = { std::stoi (idStr), timeStr, std::stod (valueStr) };
 
@@ -130,7 +118,6 @@ processFile (const std::string &filename)
         }
     }
 
-  inputFile.close ();
   validFile.closeFile ();
   outlierFile.closeFile ();
   summaryFile.closeFile ();
