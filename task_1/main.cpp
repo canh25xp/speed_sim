@@ -18,7 +18,6 @@ main (int argc, char **argv)
 
   std::cout << parser.getArg ();
 
-  // Create CSVHandler instance
   CSVHandler csvHandler (DATA_FILE_NAME);
 
   if (!csvHandler.openFile ())
@@ -26,14 +25,12 @@ main (int argc, char **argv)
       return 1;
     }
 
-  // Write header to CSV file
   csvHandler.writeHeader ({ "id", "time", "value" });
 
   // The interval should be normalize to seconds before passing to the function:interval*60*60
   // However to save time, we will keep it as it.
   runSimulation (num_sensors, sampling, interval, csvHandler);
 
-  // Close the file
   csvHandler.closeFile ();
 
   return 0;
