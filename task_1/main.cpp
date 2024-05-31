@@ -31,7 +31,5 @@ main (int argc, char **argv)
   // However to save time, we will keep it as it.
   runSimulation (num_sensors, sampling, interval, csvHandler);
 
-  csvHandler.closeFile ();
-
   return 0;
 }
