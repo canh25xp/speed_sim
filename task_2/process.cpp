@@ -1,7 +1,6 @@
 #include "process.hpp"
 #include "common.hpp"
 #include "csv.hpp"
-#include <cmath>
 #include <ctime>
 #include <format>
 #include <fstream>
