@@ -1,4 +1,5 @@
 #include "process.hpp"
+#include "csv.hpp"
 #include <cmath>
 #include <ctime>
 #include <fstream>
@@ -47,9 +48,9 @@ void
 processFile (const std::string &filename)
 {
   std::ifstream inputFile (filename);
-  std::ofstream validFile ("valid_speed_data.csv");
-  std::ofstream outlierFile ("outlier_data.csv");
-  std::ofstream summaryFile ("data_summary.csv");
+  CSVHandler validFile ("valid_speed_data.csv");
+  CSVHandler outlierFile ("outlier_data.csv");
+  CSVHandler summaryFile ("data_summary.csv");
 
   if (!inputFile.is_open ())
     {
@@ -57,8 +58,8 @@ processFile (const std::string &filename)
       return;
     }
 
-  if (!validFile.is_open () || !outlierFile.is_open ()
-      || !summaryFile.is_open ())
+  if (!validFile.openFile () || !outlierFile.openFile ()
+      || !summaryFile.openFile ())
     {
       std::cerr << "Could not open the output files." << std::endl;
       return;
@@ -66,7 +67,9 @@ processFile (const std::string &filename)
 
   std::string line;
   std::getline (inputFile, line); // Read header
-  validFile << line << std::endl;
+  validFile.writeHeader ({ "id", "time", "value" });
+  outlierFile.writeHeader ({ "id", "time", "value" });
+  summaryFile.writeHeader ({ "id", "parameter", "time", "value" });
 
   std::vector<SpeedData> outliers;
   std::vector<SpeedData> validData;
@@ -114,21 +117,18 @@ processFile (const std::string &filename)
         }
     }
 
-  outlierFile << "number of outliers: " << outliers.size () << std::endl;
-  outlierFile << "id,time,value" << std::endl;
   for (const auto &data : outliers)
     {
-      outlierFile << data.id << "," << data.time << "," << data.value
-                  << std::endl;
+      outlierFile.writeRow ({ std::to_string (data.id), data.time,
+                              std::to_string (data.value) });
     }
 
   for (const auto &data : validData)
     {
-      validFile << data.id << "," << data.time << "," << data.value
-                << std::endl;
+      validFile.writeRow ({ std::to_string (data.id), data.time,
+                            std::to_string (data.value) });
     }
 
-  summaryFile << "id,parameter,time,value" << std::endl;
   for (const auto &sensorData : summaries)
     {
       int id = sensorData.first;
@@ -138,17 +138,17 @@ processFile (const std::string &filename)
           const SummaryData &summary = hourlyData.second;
           double mean = summary.sum / summary.count;
 
-          summaryFile << id << ",max," << summary.max_time << ","
-                      << summary.max_value << std::endl;
-          summaryFile << id << ",min," << summary.min_time << ","
-                      << summary.min_value << std::endl;
-          summaryFile << id << ",mean," << hourTime << "," << mean
-                      << std::endl;
+          summaryFile.writeRow ({ std::to_string (id), "max", summary.max_time,
+                                  std::to_string (summary.max_value) });
+          summaryFile.writeRow ({ std::to_string (id), "min", summary.min_time,
+                                  std::to_string (summary.min_value) });
+          summaryFile.writeRow ({ std::to_string (id), "mean", hourTime,
+                                  std::to_string (mean) });
         }
     }
 
   inputFile.close ();
-  validFile.close ();
-  outlierFile.close ();
-  summaryFile.close ();
+  validFile.closeFile ();
+  outlierFile.closeFile ();
+  summaryFile.closeFile ();
 }
