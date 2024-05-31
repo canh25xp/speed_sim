@@ -93,6 +93,8 @@ CSVHandler::readFile ()
   std::vector<std::vector<std::string> > data;
   std::string line;
 
+  std::getline (inputFile, line); // Read header
+
   while (getline (inputFile, line))
     {
       std::istringstream ss (line);
