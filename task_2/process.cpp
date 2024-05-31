@@ -79,8 +79,7 @@ processFile (const std::string &filename)
         }
     }
 
-  outlierFile.writeRow (
-      { std::format ("number of outliers: {}", outliers.size ()) });
+  outlierFile.writeRow ({ std::format ("number of outliers: {}", outliers.size ()) });
   outlierFile.writeHeader ({ "id", "time", "value" });
   for (const auto &data : outliers)
     {
@@ -102,10 +101,8 @@ processFile (const std::string &filename)
           const std::string &hourTime = hourlyData.first;
           const SummaryData &summary = hourlyData.second;
           double mean = summary.sum / summary.count;
-          SpeedDataSummary max{ id, "max", summary.max_time,
-                                summary.max_value };
-          SpeedDataSummary min{ id, "min", summary.min_time,
-                                summary.min_value };
+          SpeedDataSummary max{ id, "max", summary.max_time, summary.max_value };
+          SpeedDataSummary min{ id, "min", summary.min_time, summary.min_value };
           SpeedDataSummary avg{ id, "mean", hourTime, summary.max_value };
 
           summaryFile.writeRow (max);

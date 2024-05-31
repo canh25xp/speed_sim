@@ -14,7 +14,7 @@ CSVHandler::CSVHandler (const std::string &filename)
 
 CSVHandler::~CSVHandler ()
 {
-  this->closeFile();
+  this->closeFile ();
 }
 
 bool
@@ -81,8 +81,7 @@ CSVHandler::writeRow (const SpeedDataSummary &data)
 {
   std::ostringstream oss;
   oss << std::fixed << std::setprecision (1) << data.value;
-  writeRow (
-      { std::to_string (data.id), data.parameter, data.time, oss.str () });
+  writeRow ({ std::to_string (data.id), data.parameter, data.time, oss.str () });
 }
 
 std::vector<std::vector<std::string> >
