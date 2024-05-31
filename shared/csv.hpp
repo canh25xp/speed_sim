@@ -21,7 +21,7 @@ public:
   std::vector<std::vector<std::string> > readFile ();
 
 private:
-  std::string filename;
+  std::string fileName;
   std::ofstream outputFile;
   std::ifstream inputFile;
   bool fileOpened;

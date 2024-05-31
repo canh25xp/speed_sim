@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-CSVHandler::CSVHandler (const std::string &filename)
-    : filename (filename), fileOpened (false)
+CSVHandler::CSVHandler (const std::string &fileName)
+    : fileName (fileName), fileOpened (false)
 {
 }
 
@@ -20,10 +20,10 @@ CSVHandler::~CSVHandler ()
 bool
 CSVHandler::openFile ()
 {
-  outputFile.open (filename);
+  outputFile.open (fileName);
   if (!outputFile)
     {
-      std::cerr << "Error opening file: " << filename << std::endl;
+      std::cerr << "Error opening file: " << fileName << std::endl;
       return false;
     }
   fileOpened = true;
@@ -87,10 +87,10 @@ CSVHandler::writeRow (const SpeedDataSummary &data)
 std::vector<std::vector<std::string> >
 CSVHandler::readFile ()
 {
-  inputFile.open (filename);
+  inputFile.open (fileName);
   if (!inputFile)
     {
-      std::cerr << "Error opening file for reading: " << filename << std::endl;
+      std::cerr << "Error opening file for reading: " << fileName << std::endl;
       return {};
     }
 
