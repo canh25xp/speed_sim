@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 
-#define SAVE_NAME "speed_data.csv"
+#define DATA_FILE_NAME "speed_data.csv"
+#define VALID_FILE_NAME "valid_speed_data.csv"
+#define OUTLIER_FILE_NAME "outlier_data.csv"
+#define SUMMARY_FILE_NAME "data_summary.csv"
 
 struct SpeedData {
     int id;

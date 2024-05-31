@@ -31,9 +31,9 @@ void
 processFile (const std::string &filename)
 {
   CSVHandler inputFile (filename);
-  CSVHandler validFile ("valid_speed_data.csv");
-  CSVHandler outlierFile ("outlier_data.csv");
-  CSVHandler summaryFile ("data_summary.csv");
+  CSVHandler validFile (VALID_FILE_NAME);
+  CSVHandler outlierFile (OUTLIER_FILE_NAME);
+  CSVHandler summaryFile (SUMMARY_FILE_NAME);
 
   if (!validFile.openFile () || !outlierFile.openFile ()
       || !summaryFile.openFile ())

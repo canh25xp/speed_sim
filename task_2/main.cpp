@@ -8,7 +8,7 @@ main (int argc, char *argv[])
 {
   Parser parser (argc, argv);
 
-  std::string filename = parser.getPositional (0, SAVE_NAME);
+  std::string filename = parser.getPositional (0, DATA_FILE_NAME);
 
   processFile (filename);
   return 0;

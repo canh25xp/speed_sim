@@ -18,7 +18,7 @@ main (int argc, char **argv)
   std::cout << "Simulation started..." << std::endl;
 
   // Create CSVHandler instance
-  CSVHandler csvHandler (SAVE_NAME);
+  CSVHandler csvHandler (DATA_FILE_NAME);
 
   if (!csvHandler.openFile ())
     {
@@ -35,7 +35,7 @@ main (int argc, char **argv)
   // Close the file
   csvHandler.closeFile ();
 
-  std::cout << "Simulation completed. Data saved to " << SAVE_NAME
+  std::cout << "Simulation completed. Data saved to " << DATA_FILE_NAME
             << std::endl;
   return 0;
 }
