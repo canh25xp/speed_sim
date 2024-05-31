@@ -29,8 +29,8 @@ main (int argc, char **argv)
   // Write header to CSV file
   csvHandler.writeHeader ({ "id", "time", "value" });
 
-  // The interval should be convert to seconds before passing to the
-  // runSimulation: interval*60*60 However to save time, we will keep it as it.
+  // The interval should be normalize to seconds before passing to the function:interval*60*60
+  // However to save time, we will keep it as it.
   runSimulation (num_sensors, sampling, interval, csvHandler);
 
   // Close the file

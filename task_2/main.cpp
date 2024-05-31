@@ -10,7 +10,7 @@ main (int argc, char *argv[])
 
   // clang-format off
   std::string filename = parser.get (0, DATA_FILE_NAME);
-  bool sort            = parser.has("-s");
+  bool sort            = parser.has ("-s");
   // clang-format on
 
   processFile (filename);
